@@ -153,198 +153,180 @@ function App() {
 
   return (
     <>
-      <div className=" background-image flex-col p-4 h-screen bg-cover bg-center flex items-center justify-center"
-      >
+      <div className="background-image flex-col p-4 min-h-screen bg-cover bg-center flex items-center justify-center text-white">
+      <div className="mb-14 mt-4">
+        <h1 className="text-3xl font-bold mb-2">Password Generator</h1>
+        <motion.div
+          initial={{ opacity: 0, y: -0 }}
+          animate={{ opacity: 1, y: 2 }}
+          transition={{ duration: 7 }}
+          className="text-md font-bold tracking-tight"
+        >
+          Create a strong and secure password by enabling uppercase and lowercase letters, numbers, and special characters. Diverse characters make your password resilient against hacking methods.
+        </motion.div>
+      </div>
 
-        <div className='mb-14 mt-4'>
-
-          <h1 className="text-3xl font-bold mb-2 text-white">Password Generator</h1>
+      <div className="flex-1 flex flex-row">
+        <div className="flex-1 pr-4">
+          <div className="flex items-center mb-4">
+            <div className="ml-2 border p-2 mx-2 w-64 h-8 text-center items-center overflow-hidden">
+              <span className="block">{password}</span>
+            </div>
+            <motion.div
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <CopyToClipboard text={password} onCopy={handleCopyClick}>
+                <Tooltip title={copy ? 'Copied!' : 'Copy to Clipboard'} arrow>
+                  {!copy ? (
+                    <ContentCopyOutlinedIcon className="cursor-pointer hover:text-blue-500 transition duration-300" />
+                  ) : (
+                    <ContentCopyTwoToneIcon className="cursor-pointer text-green-500" />
+                  )}
+                </Tooltip>
+              </CopyToClipboard>
+            </motion.div>
+          </div>
 
           <motion.div
-            initial={{ opacity: 0, y: -0 }}
-            animate={{ opacity: 1, y: 2 }}
-            transition={{ duration: 7 }}
-            className=" text-gray-300 font-serif text-md font-bold tracking-tight "
+            className="box"
+            transition={{
+              type: 'spring',
+              stiffness: 100,
+              mass: 1,
+              damping: 1
+            }}
+            animate={{ x: 20 }}
           >
-            Create a strong and secure password by enabling uppercase and lowercase letters, numbers, and special characters. Diverse characters make your password resilient against hacking methods.
+            <div className="mt-2">
+              <Button
+                variant="contained"
+                color="success"
+                onClick={generatePassword}
+              >
+                Generate Password
+              </Button>
+            </div>
           </motion.div>
         </div>
 
-        <div className="flex-1 flex flex-row">
-          <div className="flex-1 pr-4">
-            <div className="flex items-center mb-4">
-              <div className="ml-2 border p-2 mx-2 w-64 h-8 text-center items-center overflow-hidden">
-                <span className='block text-white'>{password}</span>
-              </div>
+        <div className="flex-1 pl-4 flex flex-col">
+          <motion.div
+            initial={{ x: -100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1, transition: { duration: 1.5, ease: "easeInOut", delay: 0.3 } }}
+            className="text-semibold font-medium text-sm sm:text-base mb-4"
+          >
+            <div className="flex items-center">
+              <p className="text-lg mb-2 mr-4">Add Uppercase Letters</p>
               <motion.div
                 whileHover={{ scale: 1.2 }}
                 whileTap={{ scale: 0.9 }}
               >
-                <CopyToClipboard text={password} onCopy={handleCopyClick}>
-                  <Tooltip title={copy ? 'Copied!' : 'Copy to Clipboard'} arrow>
-                    {!copy ? (
-                      <ContentCopyOutlinedIcon className="cursor-pointer text-gray-500 hover:text-blue-500 transition duration-300" />
-                    ) : (
-                      <ContentCopyTwoToneIcon className="cursor-pointer text-green-500" />
-                    )}
-                  </Tooltip>
-                </CopyToClipboard>
+                <IOSSwitch
+                  checked={includeUpperCase}
+                  onChange={() => setIncludeUpperCase(!includeUpperCase)}
+                  inputProps={{ 'aria-label': 'toggle switch' }}
+                />
               </motion.div>
-
-
             </div>
+          </motion.div>
 
-            <motion.div
-              className='box'
-              transition={{
-                type: 'spring',
-                stiffness: 100,
-                mass: 1,
-                damping: 1
-              }}
-              animate={{ x: 20 }}
-            >
-              <div className="mt-2">
-                <Button
-                  variant="contained"
-                  color="success"
-                  onClick={generatePassword}
-                >
-                  Generate Password
-                </Button>
-              </div>
-            </motion.div>
+          <motion.div
+            initial={{ x: -100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1, transition: { duration: 1.5, ease: "easeInOut", delay: 0.3 } }}
+            className="text-semibold font-medium text-sm sm:text-base mb-4"
+          >
+            <div className="flex items-center">
+              <p className="text-lg mb-2 mr-4">Add Lowercase Letters</p>
+              <motion.div
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <IOSSwitch
+                  checked={includeLowerCase}
+                  onChange={() => setIncludeLowerCase(!includeLowerCase)}
+                  inputProps={{ 'aria-label': 'toggle switch' }}
+                />
+              </motion.div>
+            </div>
+          </motion.div>
 
-          </div>
+          <motion.div
+            initial={{ x: -100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1, transition: { duration: 1.5, ease: "easeInOut", delay: 0.3 } }}
+            className="text-semibold font-medium text-sm sm:text-base mb-4"
+          >
+            <div className="flex items-center">
+              <p className="text-lg mb-2 mr-4">Include Numbers</p>
+              <motion.div
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <IOSSwitch
+                  checked={includeNumbers}
+                  onChange={() => setIncludeNumbers(!includeNumbers)}
+                  inputProps={{ 'aria-label': 'toggle switch' }}
+                />
+              </motion.div>
+            </div>
+          </motion.div>
 
-          <div className="flex-1 pl-4 flex flex-col">
-            <motion.div
-              initial={{ x: -100, opacity: 0 }}
-              animate={{ x: 0, opacity: 1, transition: { duration: 1.5, ease: "easeInOut", delay: 0.3 } }}
-              className="text-semibold font-medium text-sm sm:text-base"
-            >
-              <div className="mb-4 flex items-center">
-                <p className="text-lg mb-2 mr-4 text-white font-serif">Add Uppercase Letters</p>
-                <motion.div
-                  whileHover={{ scale: 1.2 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <IOSSwitch
-                    checked={includeUpperCase}
-                    onChange={() => setIncludeUpperCase(!includeUpperCase)}
-                    inputProps={{ 'aria-label': 'toggle switch' }}
-                  />
-                </motion.div>
-              </div>
-            </motion.div>
+          <motion.div
+            initial={{ x: -100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1, transition: { duration: 1.5, ease: "easeInOut", delay: 0.3 } }}
+            className="text-semibold font-medium text-sm sm:text-base mb-4"
+          >
+            <div className="flex items-center">
+              <p className="text-lg mb-2 mr-4">Include Symbols</p>
+              <motion.div
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <IOSSwitch
+                  checked={includeSymbols}
+                  onChange={() => setIncludeSymbols(!includeSymbols)}
+                  inputProps={{ 'aria-label': 'toggle switch' }}
+                />
+              </motion.div>
+            </div>
+          </motion.div>
 
-            <motion.div
-              initial={{ x: -100, opacity: 0 }}
-              animate={{ x: 0, opacity: 1, transition: { duration: 1.5, ease: "easeInOut", delay: 0.3 } }}
-              className="text-semibold font-medium text-sm sm:text-base"
-            >
-              <div className="mb-4 flex items-center">
-                <motion.div
-                  initial={{ x: -100, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1, transition: { duration: 1.5, ease: "easeInOut", delay: 0.3 } }}
-                  className="text-semibold font-medium text-sm sm:text-base"
-                >
+          <motion.div
+            initial={{ x: -100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1, transition: { duration: 1.5, ease: "easeInOut", delay: 0.3 } }}
+            className="text-semibold font-medium text-sm sm:text-base mb-4"
+          >
+            {/* Additional elements or text if needed */}
+          </motion.div>
 
-                </motion.div>
-                <p className="text-lg mb-2 mr-4 text-white font-serif">Add Lowercase Letters</p>
-                <motion.div
-                  whileHover={{ scale: 1.2 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <IOSSwitch
-                    checked={includeLowerCase}
-                    onChange={() => setIncludeLowerCase(!includeLowerCase)}
-                    inputProps={{ 'aria-label': 'toggle switch' }}
-                  />
-
-                </motion.div>
-
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ x: -100, opacity: 0 }}
-              animate={{ x: 0, opacity: 1, transition: { duration: 1.5, ease: "easeInOut", delay: 0.3 } }}
-              className="text-semibold font-medium text-sm sm:text-base"
-            >
-              <div className="mb-4 flex items-center">
-                <p className="text-lg mb-2 mr-4 text-white font-serif">Include Numbers</p>
-                <motion.div
-                  whileHover={{ scale: 1.2 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <IOSSwitch
-                    checked={includeNumbers}
-                    onChange={() => setIncludeNumbers(!includeNumbers)}
-                    inputProps={{ 'aria-label': 'toggle switch' }}
-                  />
-
-                </motion.div>
-
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ x: -100, opacity: 0 }}
-              animate={{ x: 0, opacity: 1, transition: { duration: 1.5, ease: "easeInOut", delay: 0.3 } }}
-              className="text-semibold font-medium text-sm sm:text-base"
-            >
-              <div className="mb-4 flex items-center">
-                <p className="text-lg mb-2 mr-4 text-white font-serif">Include Symbols</p>
-                <motion.div
-                  whileHover={{ scale: 1.2 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <IOSSwitch
-                    checked={includeSymbols}
-                    onChange={() => setIncludeSymbols(!includeSymbols)}
-                    inputProps={{ 'aria-label': 'toggle switch' }}
-                  />
-                </motion.div>
-
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ x: -100, opacity: 0 }}
-              animate={{ x: 0, opacity: 1, transition: { duration: 1.5, ease: "easeInOut", delay: 0.3 } }}
-              className="text-semibold font-medium text-sm sm:text-base"
-            >
-
-            </motion.div>
-            <p className="text-lg mb-2 mr-4 text-white">Password Length</p>
-            <motion.div
-              initial={{ x: -100, opacity: 0 }}
-              animate={{ x: 0, opacity: 1, transition: { duration: 1.5, ease: "easeInOut", delay: 0.3 } }}
-              className="text-semibold font-medium text-sm sm:text-base"
-            >
-              <Slider
-                aria-labelledby="slider-label"
-                value={passwordLength}
-                onChange={handleLength}
-                valueLabelDisplay="auto"
-                color="success"
-                step={1}
-                marks
-                min={1}
-                max={12}
-              />
-            </motion.div>
-
-          </div>
-
+          <p className="text-lg mb-2 mr-4">Password Length</p>
+          <motion.div
+            initial={{ x: -100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1, transition: { duration: 1.5, ease: "easeInOut", delay: 0.3 } }}
+            className="text-semibold font-medium text-sm sm:text-base mb-4"
+          >
+            <Slider
+              aria-labelledby="slider-label"
+              value={passwordLength}
+              onChange={handleLength}
+              valueLabelDisplay="auto"
+              color="success"
+              step={1}
+              marks
+              min={1}
+              max={12}
+            />
+          </motion.div>
         </div>
-        <footer className='my-2 mx-3 text-sm text-gray-300 self-end cursor-pointer d-flex justify-content-end align-items-center' onClick={handleClick}>
-          <span className="d-none d-sm-inline">Developed by : </span>
-          <span className="d-sm-none">Akbr Ali</span>
-        </footer>
-        <ToastContainer />
       </div>
+
+      <footer className='my-2 mx-3 text-sm self-end cursor-pointer d-flex justify-content-end align-items-center' onClick={handleClick}>
+        <span className="d-none sm:inline">Developed by: Akbr Ali</span>
+        <span className="d-sm-none">Akbr Ali</span>
+      </footer>
+
+      <ToastContainer />
+    </div>
 
     </>
   )
