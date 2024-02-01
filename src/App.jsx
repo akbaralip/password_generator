@@ -9,7 +9,7 @@ import {
 import 'tailwindcss/tailwind.css';
 import Switch from '@mui/material/Switch';
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from 'framer-motion';
 
 import { styled } from "@mui/material/styles";
 import { ToastContainer, toast } from 'react-toastify';
@@ -150,7 +150,6 @@ function App() {
 
 
 
-
   return (
     <>
       <div className=" flex-col p-4 h-screen bg-cover bg-center flex items-center justify-center"
@@ -159,35 +158,54 @@ function App() {
         }}>
 
         <div className='mb-14 mt-4'>
+
           <h1 className="text-3xl font-bold mb-2 text-blue-500">Password Generator</h1>
+
           <motion.div
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
+            // initial={{ opacity: 0, y: -50 }}
+            // animate={{ opacity: 1, y: 0 }}
+            // transition={{ duration: 7 }}
             className=" text-gray-300 font-serif text-md font-bold tracking-tight "
           >
             Create a strong and secure password by enabling uppercase and lowercase letters, numbers, and special characters. Diverse characters make your password resilient against hacking methods.
           </motion.div>
         </div>
+
         <div className="flex-1 flex flex-row">
           <div className="flex-1 pr-4">
             <div className="flex items-center mb-4">
               <div className="ml-2 border p-2 mx-2 w-64 h-8 text-center items-center overflow-hidden">
                 <span className='block text-white'>{password}</span>
               </div>
-              <CopyToClipboard text={password} onCopy={handleCopyClick}>
-                <Tooltip title={copy ? 'Copied!' : 'Copy to Clipboard'} arrow>
-                  {!copy ? (
-                    <ContentCopyOutlinedIcon className="cursor-pointer text-gray-500 hover:text-blue-500 transition duration-300" />
-                  ) : (
-                    <ContentCopyTwoToneIcon className="cursor-pointer text-green-500" />
-                  )}
-                </Tooltip>
-              </CopyToClipboard>
+              <motion.div
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <CopyToClipboard text={password} onCopy={handleCopyClick}>
+                  <Tooltip title={copy ? 'Copied!' : 'Copy to Clipboard'} arrow>
+                    {!copy ? (
+                      <ContentCopyOutlinedIcon className="cursor-pointer text-gray-500 hover:text-blue-500 transition duration-300" />
+                    ) : (
+                      <ContentCopyTwoToneIcon className="cursor-pointer text-green-500" />
+                    )}
+                  </Tooltip>
+                </CopyToClipboard>
+              </motion.div>
+
 
             </div>
-            <div className='flex px-2'>
-              <div className="mt-2 ">
+
+            <motion.div
+              className='box'
+              transition={{
+                type: 'spring',
+                stiffness: 100,
+                mass: 1,
+                damping: 1
+              }}
+              animate={{ x: 20 }}
+            >
+              <div className="mt-2">
                 <Button
                   variant="contained"
                   color="primary"
@@ -196,53 +214,103 @@ function App() {
                   Generate Password
                 </Button>
               </div>
-            </div>
+            </motion.div>
+
           </div>
+
           <div className="flex-1 pl-4 flex flex-col">
-            <div className="mb-4 flex items-center">
-              <p className="text-lg mb-2 mr-4 text-white font-serif">Add Uppercase Letters</p>
-              <IOSSwitch
-                checked={includeUpperCase}
-                onChange={() => setIncludeUpperCase(!includeUpperCase)}
-                inputProps={{ 'aria-label': 'toggle switch' }}
-              />
-            </div>
+            <motion.div
+              className="mb-4 flex items-center"
+              initial={{ x: -100, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              <div className="mb-4 flex items-center">
+                <p className="text-lg mb-2 mr-4 text-white font-serif">Add Uppercase Letters</p>
+                <motion.div
+                  whileHover={{ scale: 1.2 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <IOSSwitch
+                    checked={includeUpperCase}
+                    onChange={() => setIncludeUpperCase(!includeUpperCase)}
+                    inputProps={{ 'aria-label': 'toggle switch' }}
+                  />
+                </motion.div>
+              </div>
+            </motion.div>
+
             <div className="mb-4 flex items-center">
               <p className="text-lg mb-2 mr-4 text-white font-serif">Add Lowercase Letters</p>
-              <IOSSwitch
-                checked={includeLowerCase}
-                onChange={() => setIncludeLowerCase(!includeLowerCase)}
-                inputProps={{ 'aria-label': 'toggle switch' }}
-              />
+              <motion.div
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <IOSSwitch
+                  checked={includeLowerCase}
+                  onChange={() => setIncludeLowerCase(!includeLowerCase)}
+                  inputProps={{ 'aria-label': 'toggle switch' }}
+                />
+
+              </motion.div>
+
             </div>
+
             <div className="mb-4 flex items-center">
               <p className="text-lg mb-2 mr-4 text-white font-serif">Include Numbers</p>
-              <IOSSwitch
-                checked={includeNumbers}
-                onChange={() => setIncludeNumbers(!includeNumbers)}
-                inputProps={{ 'aria-label': 'toggle switch' }}
-              />
+              <motion.div
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <IOSSwitch
+                  checked={includeNumbers}
+                  onChange={() => setIncludeNumbers(!includeNumbers)}
+                  inputProps={{ 'aria-label': 'toggle switch' }}
+                />
+
+              </motion.div>
+
             </div>
             <div className="mb-4 flex items-center">
               <p className="text-lg mb-2 mr-4 text-white font-serif">Include Symbols</p>
-              <IOSSwitch
-                checked={includeSymbols}
-                onChange={() => setIncludeSymbols(!includeSymbols)}
-                inputProps={{ 'aria-label': 'toggle switch' }}
-              />
+              <motion.div
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <IOSSwitch
+                  checked={includeSymbols}
+                  onChange={() => setIncludeSymbols(!includeSymbols)}
+                  inputProps={{ 'aria-label': 'toggle switch' }}
+                />
+              </motion.div>
+
             </div>
+            <motion.div
+              initial={{ x: -100, opacity: 0 }}
+              animate={{ x: 0, opacity: 1, transition: { duration: 1.5, ease: "easeInOut", delay: 0.3 } }}
+              className="text-semibold font-medium text-sm sm:text-base"
+            >
+
+            </motion.div>
             <p className="text-lg mb-2 mr-4 text-white">Password Length</p>
-            <Slider
-              aria-labelledby="slider-label"
-              value={passwordLength}
-              onChange={handleLength}
-              valueLabelDisplay="auto"
-              color="success"
-              step={1}
-              marks
-              min={1}
-              max={12}
-            />
+            <motion.div
+              initial={{ x: -100, opacity: 0 }}
+              animate={{ x: 0, opacity: 1, transition: { duration: 1.5, ease: "easeInOut", delay: 0.3 } }}
+              className="text-semibold font-medium text-sm sm:text-base"
+            >
+              <Slider
+                aria-labelledby="slider-label"
+                value={passwordLength}
+                onChange={handleLength}
+                valueLabelDisplay="auto"
+                color="success"
+                step={1}
+                marks
+                min={1}
+                max={12}
+              />
+            </motion.div>
+
           </div>
 
         </div>
