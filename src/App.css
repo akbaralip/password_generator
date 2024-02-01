@@ -1,5 +1,6 @@
 .background-image {
-    background-image: url('./background-image/bck.jpg');
+    background: linear-gradient(to right, #060505, #a7a497);
     background-size: cover;
     background-position: center;
   }
+  

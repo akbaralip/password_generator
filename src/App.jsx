@@ -158,7 +158,7 @@ function App() {
 
         <div className='mb-14 mt-4'>
 
-          <h1 className="text-3xl font-bold mb-2 text-blue-500">Password Generator</h1>
+          <h1 className="text-3xl font-bold mb-2 text-white">Password Generator</h1>
 
           <motion.div
             initial={{ opacity: 0, y: -0 }}
@@ -207,7 +207,7 @@ function App() {
               <div className="mt-2">
                 <Button
                   variant="contained"
-                  color="primary"
+                  color="success"
                   onClick={generatePassword}
                 >
                   Generate Password
