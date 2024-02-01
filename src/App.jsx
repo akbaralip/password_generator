@@ -137,6 +137,7 @@ function App() {
   }
 
   const copyStatus = copy ? 'copy' : 'copied';
+
   const handleCopyClick = () => {
     setCopy(true);
     setTimeout(() => setCopy(false), 1000);
@@ -152,19 +153,17 @@ function App() {
 
   return (
     <>
-      <div className=" flex-col p-4 h-screen bg-cover bg-center flex items-center justify-center"
-        style={{
-          backgroundImage: `url('/src/background-image/bck.jpg')`,
-        }}>
+      <div className=" background-image flex-col p-4 h-screen bg-cover bg-center flex items-center justify-center"
+      >
 
         <div className='mb-14 mt-4'>
 
           <h1 className="text-3xl font-bold mb-2 text-blue-500">Password Generator</h1>
 
           <motion.div
-            // initial={{ opacity: 0, y: -50 }}
-            // animate={{ opacity: 1, y: 0 }}
-            // transition={{ duration: 7 }}
+            initial={{ opacity: 0, y: -0 }}
+            animate={{ opacity: 1, y: 2 }}
+            transition={{ duration: 7 }}
             className=" text-gray-300 font-serif text-md font-bold tracking-tight "
           >
             Create a strong and secure password by enabling uppercase and lowercase letters, numbers, and special characters. Diverse characters make your password resilient against hacking methods.
@@ -220,10 +219,9 @@ function App() {
 
           <div className="flex-1 pl-4 flex flex-col">
             <motion.div
-              className="mb-4 flex items-center"
               initial={{ x: -100, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.5 }}
+              animate={{ x: 0, opacity: 1, transition: { duration: 1.5, ease: "easeInOut", delay: 0.3 } }}
+              className="text-semibold font-medium text-sm sm:text-base"
             >
               <div className="mb-4 flex items-center">
                 <p className="text-lg mb-2 mr-4 text-white font-serif">Add Uppercase Letters</p>
@@ -240,51 +238,78 @@ function App() {
               </div>
             </motion.div>
 
-            <div className="mb-4 flex items-center">
-              <p className="text-lg mb-2 mr-4 text-white font-serif">Add Lowercase Letters</p>
-              <motion.div
-                whileHover={{ scale: 1.2 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <IOSSwitch
-                  checked={includeLowerCase}
-                  onChange={() => setIncludeLowerCase(!includeLowerCase)}
-                  inputProps={{ 'aria-label': 'toggle switch' }}
-                />
+            <motion.div
+              initial={{ x: -100, opacity: 0 }}
+              animate={{ x: 0, opacity: 1, transition: { duration: 1.5, ease: "easeInOut", delay: 0.3 } }}
+              className="text-semibold font-medium text-sm sm:text-base"
+            >
+              <div className="mb-4 flex items-center">
+                <motion.div
+                  initial={{ x: -100, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1, transition: { duration: 1.5, ease: "easeInOut", delay: 0.3 } }}
+                  className="text-semibold font-medium text-sm sm:text-base"
+                >
 
-              </motion.div>
+                </motion.div>
+                <p className="text-lg mb-2 mr-4 text-white font-serif">Add Lowercase Letters</p>
+                <motion.div
+                  whileHover={{ scale: 1.2 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <IOSSwitch
+                    checked={includeLowerCase}
+                    onChange={() => setIncludeLowerCase(!includeLowerCase)}
+                    inputProps={{ 'aria-label': 'toggle switch' }}
+                  />
 
-            </div>
+                </motion.div>
 
-            <div className="mb-4 flex items-center">
-              <p className="text-lg mb-2 mr-4 text-white font-serif">Include Numbers</p>
-              <motion.div
-                whileHover={{ scale: 1.2 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <IOSSwitch
-                  checked={includeNumbers}
-                  onChange={() => setIncludeNumbers(!includeNumbers)}
-                  inputProps={{ 'aria-label': 'toggle switch' }}
-                />
+              </div>
+            </motion.div>
 
-              </motion.div>
+            <motion.div
+              initial={{ x: -100, opacity: 0 }}
+              animate={{ x: 0, opacity: 1, transition: { duration: 1.5, ease: "easeInOut", delay: 0.3 } }}
+              className="text-semibold font-medium text-sm sm:text-base"
+            >
+              <div className="mb-4 flex items-center">
+                <p className="text-lg mb-2 mr-4 text-white font-serif">Include Numbers</p>
+                <motion.div
+                  whileHover={{ scale: 1.2 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <IOSSwitch
+                    checked={includeNumbers}
+                    onChange={() => setIncludeNumbers(!includeNumbers)}
+                    inputProps={{ 'aria-label': 'toggle switch' }}
+                  />
 
-            </div>
-            <div className="mb-4 flex items-center">
-              <p className="text-lg mb-2 mr-4 text-white font-serif">Include Symbols</p>
-              <motion.div
-                whileHover={{ scale: 1.2 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <IOSSwitch
-                  checked={includeSymbols}
-                  onChange={() => setIncludeSymbols(!includeSymbols)}
-                  inputProps={{ 'aria-label': 'toggle switch' }}
-                />
-              </motion.div>
+                </motion.div>
 
-            </div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ x: -100, opacity: 0 }}
+              animate={{ x: 0, opacity: 1, transition: { duration: 1.5, ease: "easeInOut", delay: 0.3 } }}
+              className="text-semibold font-medium text-sm sm:text-base"
+            >
+              <div className="mb-4 flex items-center">
+                <p className="text-lg mb-2 mr-4 text-white font-serif">Include Symbols</p>
+                <motion.div
+                  whileHover={{ scale: 1.2 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <IOSSwitch
+                    checked={includeSymbols}
+                    onChange={() => setIncludeSymbols(!includeSymbols)}
+                    inputProps={{ 'aria-label': 'toggle switch' }}
+                  />
+                </motion.div>
+
+              </div>
+            </motion.div>
+
             <motion.div
               initial={{ x: -100, opacity: 0 }}
               animate={{ x: 0, opacity: 1, transition: { duration: 1.5, ease: "easeInOut", delay: 0.3 } }}
