@@ -9,7 +9,7 @@ import {
 import 'tailwindcss/tailwind.css';
 import Switch from '@mui/material/Switch';
 
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 import { styled } from "@mui/material/styles";
 import { ToastContainer, toast } from 'react-toastify';
@@ -152,8 +152,7 @@ function App() {
 
 
   return (
-    <>
-      <div className="background-image flex-col p-4 min-h-screen bg-cover bg-center flex items-center justify-center text-white">
+    <div className="background-image flex-col p-4 min-h-screen bg-cover bg-center flex items-center justify-center text-white">
       <div className="mb-14 mt-4">
         <h1 className="text-3xl font-bold mb-2">Password Generator</h1>
         <motion.div
@@ -166,8 +165,8 @@ function App() {
         </motion.div>
       </div>
 
-      <div className="flex-1 flex flex-row">
-        <div className="flex-1 pr-4">
+      <div className="flex-1 flex flex-col sm:flex-row">
+        <div className="flex-1 pr-4 mb-4 sm:mb-0">
           <div className="flex items-center mb-4">
             <div className="ml-2 border p-2 mx-2 w-64 h-8 text-center items-center overflow-hidden">
               <span className="block">{password}</span>
@@ -299,12 +298,8 @@ function App() {
             {/* Additional elements or text if needed */}
           </motion.div>
 
-          <p className="text-lg mb-2 mr-4">Password Length</p>
-          <motion.div
-            initial={{ x: -100, opacity: 0 }}
-            animate={{ x: 0, opacity: 1, transition: { duration: 1.5, ease: "easeInOut", delay: 0.3 } }}
-            className="text-semibold font-medium text-sm sm:text-base mb-4"
-          >
+          <div className="text-semibold font-medium text-sm sm:text-base mb-4">
+            <p className="text-lg mb-2 mr-4">Password Length</p>
             <Slider
               aria-labelledby="slider-label"
               value={passwordLength}
@@ -316,7 +311,7 @@ function App() {
               min={1}
               max={12}
             />
-          </motion.div>
+          </div>
         </div>
       </div>
 
@@ -327,8 +322,6 @@ function App() {
 
       <ToastContainer />
     </div>
-
-    </>
   )
 }
 
